@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-<title>For My Love ❤️</title>
+<title>For My Forever ❤️</title>
 
 <style>
-body {
-  margin: 0;
-  overflow: hidden;
-  background: linear-gradient(135deg,#ff4e8a,#ff9ac6);
-  font-family: "Segoe UI", cursive;
+body{
+  margin:0;
+  background:linear-gradient(135deg,#ff4e8a,#ff9ac6);
+  font-family:Segoe UI, cursive;
+  overflow:hidden;
   display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
   height:100vh;
@@ -20,94 +20,135 @@ body {
   text-align:center;
 }
 
-/* message */
-.message {
-  z-index: 2;
-  animation: fadeIn 3s ease forwards;
+h1{
+  margin-bottom:20px;
 }
 
-h1 {
-  font-size: 3rem;
-  margin:0;
+.buttons{
+  display:grid;
+  grid-template-columns:repeat(2,150px);
+  gap:12px;
 }
 
-p {
-  font-size: 1.4rem;
-}
-
-/* hearts */
-.heart {
-  position:absolute;
-  color:#fff;
-  animation: float 6s linear infinite;
-}
-
-@keyframes float {
-  0% { transform: translateY(100vh) scale(0.5); opacity:0; }
-  20% { opacity:1; }
-  100% { transform: translateY(-10vh) scale(1.4); opacity:0; }
-}
-
-@keyframes fadeIn {
-  from {opacity:0; transform: scale(0.8);}
-  to {opacity:1; transform: scale(1);}
-}
-
-/* button */
-button {
-  padding:14px 26px;
-  font-size:16px;
+button{
+  padding:10px;
   border:none;
-  border-radius:30px;
+  border-radius:25px;
   background:white;
   color:#ff4e8a;
+  font-weight:bold;
   cursor:pointer;
-  margin-top:20px;
+}
+
+.effect{
+  position:absolute;
+  font-size:24px;
+  animation: float 5s linear infinite;
+}
+
+@keyframes float{
+  0%{transform:translateY(100vh);opacity:0}
+  20%{opacity:1}
+  100%{transform:translateY(-10vh);opacity:0}
+}
+
+#photo{
+  display:none;
+  position:absolute;
+  width:260px;
+  border-radius:20px;
+  box-shadow:0 0 30px white;
+  animation:pop 1s ease;
+}
+
+@keyframes pop{
+  from{transform:scale(0)}
+  to{transform:scale(1)}
+}
+
+.message{
+  position:absolute;
+  font-size:28px;
+  animation:pop 1s ease;
 }
 </style>
 </head>
 
 <body>
 
-<div class="message">
-  <h1>Happy First Valentine’s Day 💖</h1>
-  <p>My beautiful wife, you are my forever magic ✨</p>
-  <button onclick="celebrate()">Tap me ❤️</button>
+<h1>Happy First Valentine’s Day My Love ❤️</h1>
+
+<div class="buttons">
+<button onclick="hearts()">❤️ Hearts</button>
+<button onclick="showPhoto()">📸 Our Pic</button>
+<button onclick="sparkles()">✨ Magic</button>
+<button onclick="message('You are my forever 💕')">💌 Love</button>
+<button onclick="flowers()">🌹 Roses</button>
+<button onclick="kisses()">💋 Kisses</button>
+<button onclick="fireworks()">🎆 Boom</button>
+<button onclick="music()">🎵 Music</button>
+<button onclick="nameGlow()">💖 Your Name</button>
+<button onclick="finale()">🥰 Surprise</button>
 </div>
 
-<audio id="music" autoplay loop>
-  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_c8d0d7fdf1.mp3">
+<!-- ADD YOUR PHOTO HERE -->
+<img id="photo" src="us.jpg">
+
+<audio id="song" loop>
+<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_c8d0d7fdf1.mp3">
 </audio>
 
 <script>
-// floating hearts
-setInterval(() => {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "❤️";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = Math.random() * 25 + 15 + "px";
-  heart.style.animationDuration = 4 + Math.random()*3 + "s";
-  document.body.appendChild(heart);
 
-  setTimeout(() => heart.remove(), 6000);
-}, 200);
-
-// celebration effect
-function celebrate(){
-  for(let i=0;i<80;i++){
-    let confetti = document.createElement("div");
-    confetti.innerHTML = "✨";
-    confetti.style.position="absolute";
-    confetti.style.left=Math.random()*100+"vw";
-    confetti.style.top=Math.random()*100+"vh";
-    confetti.style.fontSize="22px";
-    confetti.style.animation="fadeIn 1s ease";
-    document.body.appendChild(confetti);
-
-    setTimeout(()=>confetti.remove(),1000);
+function createEffect(symbol, count=25){
+  for(let i=0;i<count;i++){
+    let el=document.createElement("div");
+    el.className="effect";
+    el.innerHTML=symbol;
+    el.style.left=Math.random()*100+"vw";
+    el.style.animationDuration=(3+Math.random()*3)+"s";
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),5000);
   }
 }
+
+function hearts(){createEffect("❤️",40);}
+function sparkles(){createEffect("✨",40);}
+function flowers(){createEffect("🌹",30);}
+function kisses(){createEffect("💋",30);}
+function fireworks(){createEffect("🎆",50);}
+
+function showPhoto(){
+  let p=document.getElementById("photo");
+  p.style.display="block";
+  setTimeout(()=>p.style.display="none",4000);
+}
+
+function message(text){
+  let m=document.createElement("div");
+  m.className="message";
+  m.innerText=text;
+  document.body.appendChild(m);
+  setTimeout(()=>m.remove(),3000);
+}
+
+function music(){
+  let s=document.getElementById("song");
+  if(s.paused) s.play();
+  else s.pause();
+}
+
+function nameGlow(){
+  message("I Love You Ananya ❤️"); /* change her name */
+}
+
+function finale(){
+  hearts();
+  sparkles();
+  fireworks();
+  message("Forever Yours ❤️");
+}
+
 </script>
 
 </body>
