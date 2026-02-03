@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>For My Love ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  background: linear-gradient(135deg,#ff4e8a,#ff9ac6);
+  font-family: "Segoe UI", cursive;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  color:white;
+  text-align:center;
+}
+
+/* message */
+.message {
+  z-index: 2;
+  animation: fadeIn 3s ease forwards;
+}
+
+h1 {
+  font-size: 3rem;
+  margin:0;
+}
+
+p {
+  font-size: 1.4rem;
+}
+
+/* hearts */
+.heart {
+  position:absolute;
+  color:#fff;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh) scale(0.5); opacity:0; }
+  20% { opacity:1; }
+  100% { transform: translateY(-10vh) scale(1.4); opacity:0; }
+}
+
+@keyframes fadeIn {
+  from {opacity:0; transform: scale(0.8);}
+  to {opacity:1; transform: scale(1);}
+}
+
+/* button */
+button {
+  padding:14px 26px;
+  font-size:16px;
+  border:none;
+  border-radius:30px;
+  background:white;
+  color:#ff4e8a;
+  cursor:pointer;
+  margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="message">
+  <h1>Happy First Valentine’s Day 💖</h1>
+  <p>My beautiful wife, you are my forever magic ✨</p>
+  <button onclick="celebrate()">Tap me ❤️</button>
+</div>
+
+<audio id="music" autoplay loop>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_c8d0d7fdf1.mp3">
+</audio>
+
+<script>
+// floating hearts
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 25 + 15 + "px";
+  heart.style.animationDuration = 4 + Math.random()*3 + "s";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 6000);
+}, 200);
+
+// celebration effect
+function celebrate(){
+  for(let i=0;i<80;i++){
+    let confetti = document.createElement("div");
+    confetti.innerHTML = "✨";
+    confetti.style.position="absolute";
+    confetti.style.left=Math.random()*100+"vw";
+    confetti.style.top=Math.random()*100+"vh";
+    confetti.style.fontSize="22px";
+    confetti.style.animation="fadeIn 1s ease";
+    document.body.appendChild(confetti);
+
+    setTimeout(()=>confetti.remove(),1000);
+  }
+}
+</script>
+
+</body>
+</html>
