@@ -146,11 +146,22 @@ function showMessage(text){
 /* play music safely after click */
 function playSong(){
   let song=document.getElementById("song");
+
   if(!songStarted){
+    song.volume = 0;
     song.play();
+
+    let v = 0;
+    let fade = setInterval(()=>{
+      v += 0.03;
+      song.volume = v;
+      if(v >= 1) clearInterval(fade);
+    },200);
+
     songStarted=true;
   }
 }
+
 
 /* MAIN STORY FLOW */
 function nextStep(){
@@ -220,3 +231,4 @@ function nextStep(){
 
 </body>
 </html>
+
