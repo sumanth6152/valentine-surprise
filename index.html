@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
 <title>For Mahalakshmi ❤️</title>
 
 <style>
@@ -11,14 +12,14 @@ body{
   font-family:Segoe UI, cursive;
   overflow:hidden;
 
-  /* YOUR COUPLE BACKGROUND */
+  /* CINEMATIC COUPLE BACKGROUND */
   background:
     linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
     url("bg.jpg");
 
-  background-size: cover;
-  background-position: center bottom;
-  background-repeat: no-repeat;
+  background-size:cover;
+  background-position:center bottom;
+  background-repeat:no-repeat;
 
   display:flex;
   flex-direction:column;
@@ -29,34 +30,36 @@ body{
   color:white;
 }
 
-/* heading */
+/* Heading */
 h1{
-  font-size:30px;
-  margin-bottom:30px;
+  font-size:32px;
+  margin-bottom:40px;
+  text-shadow:0 0 18px rgba(255,255,255,0.9);
 }
 
-/* single big button */
+/* Big tap button */
 button{
-  padding:18px 45px;
+  padding:20px 50px;
   font-size:22px;
   border:none;
-  border-radius:40px;
+  border-radius:45px;
   background:white;
   color:#ff4e8a;
   font-weight:bold;
   cursor:pointer;
   transition:0.25s;
+  box-shadow:0 0 25px rgba(255,255,255,0.6);
 }
 
 button:hover{
   transform:scale(1.1);
 }
 
-/* floating effects */
+/* Floating emoji effects */
 .effect{
   position:absolute;
   font-size:28px;
-  animation: float 5s linear infinite;
+  animation:float 5s linear infinite;
   pointer-events:none;
 }
 
@@ -66,44 +69,56 @@ button:hover{
   100%{transform:translateY(-10vh);opacity:0}
 }
 
-/* message */
+/* Message popup */
 .message{
   position:absolute;
   top:18%;
-  font-size:32px;
+  font-size:30px;
   font-weight:bold;
-  background:rgba(0,0,0,0.35);
+  background:rgba(0,0,0,0.4);
   padding:14px 26px;
   border-radius:20px;
+  text-align:center;
+  text-shadow:0 0 10px pink;
+  animation:fadeIn 0.5s ease;
 }
 
-/* photo */
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(-10px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* Photo finale */
 #photo{
   display:none;
-  width:300px;
+  width:320px;
   border-radius:20px;
-  box-shadow:0 0 40px white;
-  margin-top:20px;
+  box-shadow:0 0 45px white;
+  margin-top:25px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>Tap Me ❤️</h1>
-<button onclick="nextStep()">Tap Me</button>
+<h1>For My Mahalakshmi ❤️</h1>
+
+<button onclick="nextStep()">Tap Me ❤️</button>
 
 <img id="photo" src="us.jpg">
 
+<!-- YOUR SONG -->
 <audio id="song" loop>
-<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_c8d0d7fdf1.mp3">
+  <source src="song.mp3">
 </audio>
 
 <script>
 
 let step = 0;
 let currentMessage = null;
+let songStarted = false;
 
+/* create floating emojis */
 function createEffect(symbol,count=40){
   for(let i=0;i<count;i++){
     let el=document.createElement("div");
@@ -116,6 +131,7 @@ function createEffect(symbol,count=40){
   }
 }
 
+/* show message without overlap */
 function showMessage(text){
   if(currentMessage) currentMessage.remove();
 
@@ -127,6 +143,16 @@ function showMessage(text){
   currentMessage = m;
 }
 
+/* play music safely after click */
+function playSong(){
+  let song=document.getElementById("song");
+  if(!songStarted){
+    song.play();
+    songStarted=true;
+  }
+}
+
+/* MAIN STORY FLOW */
 function nextStep(){
 
   step++;
@@ -134,64 +160,63 @@ function nextStep(){
   switch(step){
 
     case 1:
-      createEffect("❤️",50);
-      showMessage("For You Mahalakshmi ❤️");
+      showMessage("These hearts are only for you ❤️");
+      createEffect("❤️",60);
       break;
 
     case 2:
-      createEffect("🌹",40);
-      showMessage("Roses for my queen 🌹");
+      showMessage("A garden of roses for my queen 🌹");
+      createEffect("🌹",50);
       break;
 
     case 3:
-      createEffect("✨",50);
-      showMessage("You are my magic ✨");
+      showMessage("You are the magic in my life ✨");
+      createEffect("✨",60);
       break;
 
     case 4:
-      createEffect("💌",35);
       showMessage("Thank you for choosing me 💌");
+      createEffect("💌",40);
       break;
 
     case 5:
-      createEffect("💋",35);
-      showMessage("Sending you kisses 😘");
+      showMessage("Sending you infinite kisses 😘");
+      createEffect("💋",40);
       break;
 
     case 6:
-      createEffect("💖",45);
       showMessage("Sumanth ❤️ Mahalakshmi");
+      createEffect("💖",60);
       break;
 
     case 7:
-      createEffect("🎆",60);
-      showMessage("You light up my life 🎆");
+      showMessage("You light up my life like fireworks 🎆");
+      createEffect("🎆",70);
       break;
 
     case 8:
-      createEffect("🥰",40);
-      showMessage("My happiness is YOU 🥰");
+      showMessage("🎵 Turn up your volume… this one's for us ❤️");
       break;
 
     case 9:
-      document.getElementById("song").play();
+      playSong();
+      showMessage("Our love song playing just for you 🎶");
       createEffect("❤️",60);
-      showMessage("Our love song 🎵");
       break;
 
     case 10:
       document.getElementById("photo").style.display="block";
-      showMessage("Forever Us ❤️");
+      showMessage("Happy Valentine’s Day Mahalakshmi ❤️\nForever Yours — Sumanth");
       break;
 
     default:
-      step = 0;
+      step=0;
       document.getElementById("photo").style.display="none";
       showMessage("Tap Me Again ❤️");
   }
 }
+
 </script>
 
 </body>
 </html>
-
